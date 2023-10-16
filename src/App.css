@@ -3,7 +3,16 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  width: 100%;
+  height: 100%;
+
+  .ChatApp {
+    height: 40%;
+    margin-bottom: 40px;
+  }
 }
+
+
 
 .logo {
   height: 6em;
