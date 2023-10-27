@@ -2,6 +2,8 @@ const express = require('express');
 const axios = require('axios');
 const {ChatBaiduWenxin} = require('langchain/chat_models/baiduwenxin');
 const {HumanMessage} = require('langchain/schema');
+const { BufferMemory } = require("langchain/memory");
+const { ConversationChain } = require("langchain/chains");
 
 const app = express();
 const port = process.env.PORT || 5003;
@@ -44,10 +46,10 @@ async function getChatResult(text) {
     return data;
 }
 
-const ernieTurbo = new ChatBaiduWenxin({
-    baiduApiKey, // In Node.js defaults to process.env.BAIDU_API_KEY
-    baiduSecretKey, // In Node.js defaults to process.env.BAIDU_SECRET_KEY
-  });
+const ernieTurbo = new ChatBaiduWenxin({ // 默认使用的是ERNIE-Bot-Turbo模型
+    baiduApiKey,
+    baiduSecretKey,
+});
   
 const ernie = new ChatBaiduWenxin({
     modelName: "ERNIE-Bot",
@@ -56,12 +58,16 @@ const ernie = new ChatBaiduWenxin({
     baiduSecretKey, // In Node.js defaults to process.env.BAIDU_SECRET_KEY
 });
   
+const memory = new BufferMemory();
+const chain = new ConversationChain({ llm: ernieTurbo, memory: memory });
 
 // langchain中的文心模型
 async function getChatResultLangchain(text) {
     const messages = [new HumanMessage(text)];
-    let res = await ernieTurbo.call(messages);
-    res = await ernie.call(messages);
+    console.log(memory);
+    // let res = await ernieTurbo.call(messages);
+    // res = await ernie.call(messages);
+    const res = await chain.call({ input: text});
     return res;
 }
 

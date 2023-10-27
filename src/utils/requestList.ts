@@ -5,7 +5,7 @@ const requestList = {
     // 获取用户信息
     getErineBot: (params: any) => {
         return service({
-            url: '/ai/oauth/2.0/token',
+            url: '/ai/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/completions',
             method: 'get',
             params
         })
@@ -13,7 +13,7 @@ const requestList = {
     // 测试express
     getExpress: (params: any) => {
         return service({
-            url: '/test',
+            url: '/express',
             method: 'get',
             params
         })
@@ -21,7 +21,7 @@ const requestList = {
     // 测试langchain
     getLangchain: (params: any) => {
         return service({
-            url: '/test/langchain',
+            url: '/express/langchain',
             method: 'get',
             params
         })

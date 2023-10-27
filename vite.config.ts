@@ -17,9 +17,9 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/ai/, ''),
         changeOrigin: true,
       },
-      '/test': {
+      '/express': {
         target: 'http://localhost:5003/',
-        rewrite: (path) => path.replace(/^\/test/, ''),
+        rewrite: (path) => path.replace(/^\/express/, ''),
         changeOrigin: true,
       }
     }

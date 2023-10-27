@@ -34,7 +34,7 @@ function LangchainChat() {
       console.log('res', res);
       appendMsg({
         type: 'text',
-        content: { text: res?.data?.kwargs?.content || 'sorry' },
+        content: { text: (res?.data?.kwargs?.content || res?.data?.response || 'sorry').split('/n')[0].split('Human')[0] },
       });
     }
   }
@@ -83,7 +83,7 @@ function App() {
       console.log('res', res);
       appendMsg({
         type: 'text',
-        content: { text: res?.data?.result || 'sorry' },
+        content: { text: res?.data?.result || res?.data?.response || 'sorry' },
       });
     }
   }
