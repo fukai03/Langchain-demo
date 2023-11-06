@@ -25,6 +25,29 @@ const requestList = {
             method: 'get',
             params
         })
+    },
+    // 测试python服务
+    getPython: (params: any) => {
+        return service({
+            url: '/api/persons',
+            method: 'get',
+            params
+        })
+    },
+    postPython: (data: any) => {
+        return service({
+            url: '/api/persons',
+            method: 'post',
+            data
+        })
+    },
+    // python wenxin
+    getPythonWenxin: (data: any) => {
+        return service({
+            url: '/api/chat',
+            method: 'post',
+            data
+        })
     }
 }
 

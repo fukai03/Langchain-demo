@@ -9,6 +9,10 @@
   .ChatApp {
     height: 40%;
     margin-bottom: 40px;
+
+    .text >p{
+      text-align: start;
+    }
   }
 }
 

@@ -16,6 +16,13 @@ function LangchainChat() {
     });
     return res;
   };
+  const getWenxinServer = async (text: string) => {
+    const params = {
+      message: text
+    }
+    const res = await requestList.getPythonWenxin(params)
+    return res;
+  }
 
   function renderMessageContent(msg: any) {
     const { content } = msg;
@@ -30,11 +37,15 @@ function LangchainChat() {
         position: 'right',
       });
       setTyping(true);
-      const res = await LanchainAi(val);
+      const res = await getWenxinServer(val);
       console.log('res', res);
       appendMsg({
         type: 'text',
-        content: { text: (res?.data?.kwargs?.content || res?.data?.response || 'sorry').split('/n')[0].split('Human')[0] },
+        content: { text: (
+          res?.data?.kwargs?.content 
+          || res?.data?.response 
+          || res?.data.message
+          || 'sorry').split('/n')[0].split('Human')[0] },
       });
     }
   }
@@ -67,8 +78,25 @@ function App() {
     return res;
   };
 
+  const getPythonServer = async () => {
+    const res = await requestList.getPython({})
+    console.log('res', res);
+    return res;
+  }
+  const postPythonServer = async () => {
+    const params = {
+      name: 'test',
+      age: 18
+    }
+    const res = await requestList.postPython(params)
+    console.log('res', res);
+    return res;
+  }
+
   useEffect(() => {
     // opneaiFunc();
+    // getPythonServer();
+    // postPythonServer();
   }, [])
 
   async function handleSend(type: string, val: string) {

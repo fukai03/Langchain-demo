@@ -11,6 +11,7 @@ export default defineConfig({
     }
   },
   server: {
+    port: 5001,
     proxy: {
       '/ai': {
         target: 'https://aip.baidubce.com/',
@@ -20,6 +21,10 @@ export default defineConfig({
       '/express': {
         target: 'http://localhost:5003/',
         rewrite: (path) => path.replace(/^\/express/, ''),
+        changeOrigin: true,
+      },
+      '/api': {
+        target: 'http://localhost:5000/',
         changeOrigin: true,
       }
     }
